@@ -1,0 +1,14 @@
+{
+  "title.chatbridge.config": "Chat Bridge",
+  "category.chatbridge.general": "Форматирование Сообщений Ботов",
+  "entry.chatbridge.bridgeEnabled": "Включено",
+  "tooltip.chatbridge.bridgeEnabled": "Включить форматирование сообщений ботов",
+  "entry.chatbridge.botNames": "Имена Ботов",
+  "tooltip.chatbridge.botNames": "Список имён ботов (Разделить пробелами)",
+  "entry.chatbridge.prefix": "Префикс",
+  "entry.chatbridge.prefixColor": "Цвет Префикса",
+  "entry.chatbridge.nameColor": "Цвет Никнейма",
+  "entry.chatbridge.messageColor": "Цвет Сообщения",
+  "entry.chatbridge.hideBotName": "Всегда Скрывать Имена Ботов",
+  "tooltip.chatbridge.hideBotName": "По умолчанию мод пытается сохранить имена ботов для сообщений\nне от пользователей (например, команды).\nЭта опция скрывает имена ботов независимо от типа сообщения."
+}

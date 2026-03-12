@@ -1,0 +1,14 @@
+{
+  "title.chatbridge.config": "Chat Bridge",
+  "category.chatbridge.general": "Bot Message Formatting",
+  "entry.chatbridge.bridgeEnabled": "Enabled",
+  "tooltip.chatbridge.bridgeEnabled": "Enable bot message formatting",
+  "entry.chatbridge.botNames": "Bot Names",
+  "tooltip.chatbridge.botNames": "List of Bot (separate with spaces)",
+  "entry.chatbridge.prefix": "Prefix",
+  "entry.chatbridge.prefixColor": "Prefix Color",
+  "entry.chatbridge.nameColor": "Username Color",
+  "entry.chatbridge.messageColor": "Message Color",
+  "entry.chatbridge.hideBotName": "Always Hide Bot Names",
+  "tooltip.chatbridge.hideBotName": "By default, mod attempts to keep bot names for messages\nthat are not related to users (e.g., commands).\nThis option hides bot names regardless of message type."
+}

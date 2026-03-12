@@ -1,0 +1,14 @@
+{
+  "title.chatbridge.config": "Chat Bridge",
+  "category.chatbridge.general": "Форматування Повідомлень Ботів",
+  "entry.chatbridge.bridgeEnabled": "Увімкнено",
+  "tooltip.chatbridge.bridgeEnabled": "Увімкнути форматування повідомлень ботів",
+  "entry.chatbridge.botNames": "Імена Ботів",
+  "tooltip.chatbridge.botNames": "Список імен ботів (Розділити пробілами)",
+  "entry.chatbridge.prefix": "Префікс",
+  "entry.chatbridge.prefixColor": "Колір Префікса",
+  "entry.chatbridge.nameColor": "Колір Нікнейма",
+  "entry.chatbridge.messageColor": "Колір Повідомлення",
+  "entry.chatbridge.hideBotName": "Завжди Приховувати Імена Ботів",
+  "tooltip.chatbridge.hideBotName": "За замовчуванням мод намагається зберігати імена ботів для повідомлень,\nщо надійшли не від користувачів (наприклад, команди).\nЦя опція приховує імена ботів незалежно від типу повідомлення."
+}
