@@ -6,7 +6,7 @@
 	"description": "Provides configurable formatting for bridge bot messages.",
 	"authors": ["FanerXp"],
 	"contact": {"sources": "https://github.com/unknown-salt/chatbridge"},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/chatbridge/icon.png",
 	"environment": "*",
 	"entrypoints": {
