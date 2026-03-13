@@ -13,7 +13,8 @@ import java.util.regex.Pattern.compile
 object ChatBridge : ModInitializer {
     val logger: Logger = LoggerFactory.getLogger("chatbridge")
     const val GUILD_PATTERN = ("^(?:G|Guild) > (?:\\[(?:\\S+?)\\] )?(\\w+)(?: \\[(?:\\S+?)\\])?: ?(.+)$")
-    const val BRIDGE_PATTERN = ("^ *(.+?)(?: attached an? \\w+(?::|$)| replied to .+ with an? \\w+(?::|$)| replied to .+?(?::|$)|:)(?:(?: (.*)?$)|$)")
+    const val BRIDGE_PATTERN =
+        ("^ *((?:.+?)(?: attached an? \\w+(?::|$)| replied to .+ with an? \\w+(?::|$)| replied to .+?(?::|$)|:))(?:(?: (.*)?$)|$)")
 
     override fun onInitialize() {
         ChatBridgeConfig.load()
