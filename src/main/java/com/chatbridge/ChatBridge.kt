@@ -55,8 +55,14 @@ object ChatBridge : ModInitializer {
 
             val formatted = Component.literal("${config.prefix} ")
                 .withColor(config.prefixColor.toColor())
-                .append(Component.literal(if (msg.isEmpty()) text else name).withColor(config.nameColor.toColor()))
-                .append(Component.literal(if (msg.isEmpty()) "" else ": $msg").withColor(config.messageColor.toColor()))
+                .append(
+                    Component.literal(if (msg.isEmpty()) text else name.replaceFirst(Regex(":$"), ""))
+                        .withColor(config.nameColor.toColor())
+                )
+                .append(
+                    Component.literal(if (msg.isEmpty()) "" else ": ${msg.replaceFirst(Regex("^: "), "")}")
+                        .withColor(config.messageColor.toColor())
+                )
 
             return formatted
         }
