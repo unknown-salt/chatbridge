@@ -44,10 +44,6 @@ object ChatBridge : ModInitializer {
             val username = match.group(1)
             val text = match.group(2)
 
-            logger.info(config.botNames.joinToString(" "))
-
-            logger.info(username)
-
             if (!config.botNames.contains(username.lowercase())) return message
 
             val bridgeMatcher = compile(BRIDGE_PATTERN).matcher(text)
