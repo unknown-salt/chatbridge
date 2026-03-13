@@ -49,13 +49,9 @@ object ChatBridge : ModInitializer {
 
             val bridgeMatcher = compile(BRIDGE_PATTERN).matcher(text)
 
-            var (name, msg) =
-                (if (bridgeMatcher.find()) bridgeMatcher.group(1) to (bridgeMatcher.group(2) ?: "") else username to text)
-
-            if (config.hideBotName) {
-                name = text
-                msg = ""
-            }
+            val (name, msg) =
+                (if (bridgeMatcher.find()) bridgeMatcher.group(1) to (bridgeMatcher.group(2)
+                    ?: "") else if (config.hideBotName) text to "" else username to text)
 
             val formatted = Component.literal("${config.prefix} ")
                 .withColor(config.prefixColor.toColor())
