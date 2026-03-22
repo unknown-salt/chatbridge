@@ -1,32 +1,35 @@
 {
-	"schemaVersion": 1,
-	"id": "chatbridge",
-	"version": "${version}",
-	"name": "ChatBridge",
-	"description": "Provides configurable formatting for bridge bot messages.",
-	"authors": ["FanerXp"],
-	"contact": {"sources": "https://github.com/unknown-salt/chatbridge"},
-	"license": "MIT",
-	"icon": "assets/chatbridge/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			{
-				"value": "com.chatbridge.ChatBridge",
-				"adapter": "kotlin"
-			}
-
-		],
-		"modmenu": [
-			"com.chatbridge.config.ChatBridgeModMenu"
-		]
-	},
-	"mixins": [],
-	"depends": {
-		"fabricloader": ">=0.18.4",
-		"minecraft": "~1.21.10",
-		"java": ">=21",
-		"fabric-api": "*",
-		"fabric-language-kotlin": "*"
-	}
+  "schemaVersion": 1,
+  "id": "chatbridge",
+  "version": "${version}",
+  "name": "ChatBridge",
+  "description": "Provides customizable formatting for bridge bot messages.",
+  "authors": [
+    "FanerXp"
+  ],
+  "contact": {
+    "sources": "https://github.com/unknown-salt/chatbridge"
+  },
+  "license": "MIT",
+  "icon": "assets/chatbridge/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "com.chatbridge.ChatBridge",
+        "adapter": "kotlin"
+      }
+    ],
+    "modmenu": [
+      "com.chatbridge.config.ChatBridgeModMenu"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.21.10",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*"
+  }
 }
