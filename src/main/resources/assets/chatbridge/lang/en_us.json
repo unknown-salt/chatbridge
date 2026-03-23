@@ -1,6 +1,6 @@
 {
   "title.chatbridge.config": "Chat Bridge",
-  "category.chatbridge.general": "Bot Message Formatting",
+  "category.chatbridge.general": "Bot Messages",
   "entry.chatbridge.bridgeEnabled": "Enabled",
   "tooltip.chatbridge.bridgeEnabled": "Enable bot message formatting",
   "entry.chatbridge.botNames": "Bot Names",
@@ -9,6 +9,16 @@
   "entry.chatbridge.prefixColor": "Prefix Color",
   "entry.chatbridge.nameColor": "Username Color",
   "entry.chatbridge.messageColor": "Message Color",
+  "entry.chatbridge.guildRankColor": "Guild Rank Color",
   "entry.chatbridge.hideBotName": "Always Hide Bot Names",
-  "tooltip.chatbridge.hideBotName": "By default, mod attempts to keep bot names for messages\nthat are not related to users (e.g., commands).\nThis option hides bot names regardless of message type."
+  "tooltip.chatbridge.hideBotName": "By default, mod attempts to keep bot names for messages\nthat are not related to users (e.g., commands).\nThis option hides bot names regardless of message type.",
+  "category.chatbridge.otherChats": "Other Chats",
+  "entry.chatbridge.guildChat": "Format Guild Messages",
+  "entry.chatbridge.officerChat": "Format Officer Messages",
+  "entry.chatbridge.partyChat": "Format Party Messages",
+  "entry.chatbridge.privateChat": "Format Private Messages",
+  "entry.chatbridge.guildNotificationColor": "Joined/Left Message Color",
+  "entry.chatbridge.badUsernameColor": "Username Color (Not Recommended)",
+  "entry.chatbridge.hideGuildRank": "Hide Guild Rank",
+  "entry.chatbridge.hidePlayerRank": "Hide Player Rank (Not Recommended)"
 }

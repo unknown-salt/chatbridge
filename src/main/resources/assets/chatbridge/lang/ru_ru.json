@@ -9,6 +9,16 @@
   "entry.chatbridge.prefixColor": "Цвет Префикса",
   "entry.chatbridge.nameColor": "Цвет Никнейма",
   "entry.chatbridge.messageColor": "Цвет Сообщения",
+  "entry.chatbridge.guildRankColor": "Цвет Ранга Игрока в Гильдии",
   "entry.chatbridge.hideBotName": "Всегда Скрывать Имена Ботов",
-  "tooltip.chatbridge.hideBotName": "По умолчанию мод пытается сохранить имена ботов для сообщений\nне от пользователей (например, команды).\nЭта опция скрывает имена ботов независимо от типа сообщения."
+  "tooltip.chatbridge.hideBotName": "По умолчанию мод пытается сохранить имена ботов для сообщений\nне от пользователей (например, команды).\nЭта опция скрывает имена ботов независимо от типа сообщения.",
+  "category.chatbridge.otherChats": "Другие Чаты",
+  "entry.chatbridge.guildChat": "Форматировать Сообщения Гильдии",
+  "entry.chatbridge.officerChat": "Форматировать Офицерские Сообщения",
+  "entry.chatbridge.partyChat": "Форматировать Сообщения Компании",
+  "entry.chatbridge.privateChat": "Форматировать Приватные Сообщения",
+  "entry.chatbridge.guildNotificationColor": "Цвет Сообщений Зашёл/Вышел",
+  "entry.chatbridge.badUsernameColor": "Цвет Никнейма (Не Рекомендуется)",
+  "entry.chatbridge.hideGuildRank": "Скрыть Ранг Игрока в Гильдии",
+  "entry.chatbridge.hidePlayerRank": "Скрыть Ранг Игрока (Не Рекомендуется)"
 }

@@ -11,7 +11,45 @@ data class Config(
     var prefix: String = "Bridge >",
     var prefixColor: String = "#616AC7",
     var nameColor: String = "#8F99FF",
-    var messageColor: String = "#C1C3C7"
+    var messageColor: String = "#C1C3C7",
+    var guildChat: GuildChat = GuildChat(),
+    var officerChat: OfficerChat = OfficerChat(),
+    var partyChat: PartyChat = PartyChat(),
+    var privateChat: PrivateChat = PrivateChat()
+)
+
+
+data class GuildChat(
+    var prefix: String = "Guild >",
+    var prefixColor: String = "#00AA00",
+    var messageColor: String = "#FFFFFF",
+    var guildNotificationColor: String = "#FFFF55",
+    var guildRankColor: String = "#00AAAA",
+    var hideGuildRank: Boolean = false,
+    var usernameColor: String? = null,
+    var hidePlayerRank: Boolean = false,
+)
+
+
+data class OfficerChat(
+    var prefix: String = "Officer >",
+    var prefixColor: String = "#616AC7",
+    var nameColor: String = "#8F99FF",
+    var messageColor: String = "#C1C3C7",
+)
+
+data class PartyChat(
+    var prefix: String = "Party >",
+    var prefixColor: String = "#616AC7",
+    var nameColor: String = "#8F99FF",
+    var messageColor: String = "#C1C3C7",
+)
+
+data class PrivateChat(
+    var prefix: String = "From >",
+    var prefixColor: String = "#616AC7",
+    var nameColor: String = "#8F99FF",
+    var messageColor: String = "#C1C3C7",
 )
 
 object ChatBridgeConfig {
@@ -21,6 +59,11 @@ object ChatBridgeConfig {
     private val file = File("config/chatbridge.json")
 
     var config = Config()
+
+    val originalGuild = config.guildChat.copy()
+    val originalOfficer = config.officerChat.copy()
+    val originalParty = config.partyChat.copy()
+    val originalPrivate = config.privateChat.copy()
 
     fun save() {
 

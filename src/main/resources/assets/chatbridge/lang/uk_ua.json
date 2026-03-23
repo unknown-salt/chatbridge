@@ -9,6 +9,16 @@
   "entry.chatbridge.prefixColor": "Колір Префікса",
   "entry.chatbridge.nameColor": "Колір Нікнейма",
   "entry.chatbridge.messageColor": "Колір Повідомлення",
+  "entry.chatbridge.guildRankColor": "Колір Рангу Гравця в Гільдії",
   "entry.chatbridge.hideBotName": "Завжди Приховувати Імена Ботів",
-  "tooltip.chatbridge.hideBotName": "За замовчуванням мод намагається зберігати імена ботів для повідомлень,\nщо надійшли не від користувачів (наприклад, команди).\nЦя опція приховує імена ботів незалежно від типу повідомлення."
+  "tooltip.chatbridge.hideBotName": "За замовчуванням мод намагається зберігати імена ботів для повідомлень,\nщо надійшли не від користувачів (наприклад, команди).\nЦя опція приховує імена ботів незалежно від типу повідомлення.",
+  "category.chatbridge.otherChats": "Інші Чати",
+  "entry.chatbridge.guildChat": "Форматувати Повідомлення Гільдії",
+  "entry.chatbridge.officerChat": "Форматування Офіцерських Повідомлень",
+  "entry.chatbridge.partyChat": "Форматувати Повідомлення Компанії",
+  "entry.chatbridge.privateChat": "Форматувати Приватні Повідомлення",
+  "entry.chatbridge.guildNotificationColor": "Колір Повідомлень Зайшов/Вийшов",
+  "entry.chatbridge.badUsernameColor": "Колір Нікнейма (Не Рекомендується)",
+  "entry.chatbridge.hideGuildRank": "Приховати Ранг Гравця в Гільдії",
+  "entry.chatbridge.hidePlayerRank": "Приховати Ранг Гравця (Не Рекомендується)"
 }
