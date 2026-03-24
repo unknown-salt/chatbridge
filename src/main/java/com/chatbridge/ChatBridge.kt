@@ -14,9 +14,9 @@ import net.minecraft.ChatFormatting
 object ChatBridge : ModInitializer {
     val logger: Logger = LoggerFactory.getLogger("chatbridge")
     const val GUILD_PATTERN =
-        ("^(?:§\\w)?(?:G|Guild) > (?:§\\w)?(.+\\[(?:\\S+?)\\] )?(\\w+)(?: §3\\[(\\S+?)\\])?(?:§\\w)?: ?(.+)$")
+        ("^(?:§\\w)?(?:G|Guild) > ((?:§\\w)?\\[(?:\\S+?)\\] )?(?:§\\w)?(\\w+)(?: §3\\[(\\S+?)\\])?(?:§\\w)?: ?(.+)$")
     const val OFFICER_PATTERN =
-        ("^(?:§\\w)?(?:Officer) > (?:§\\w)?(.+\\[(?:\\S+?)\\] )?(\\w+)(?: §3\\[(\\S+?)\\])?(?:§\\w)?: ?(.+)$")
+        ("^(?:§\\w)?(?:Officer) > ((?:§\\w)?\\[(?:\\S+?)\\] )?(?:§\\w)?(\\w+)(?: §3\\[(\\S+?)\\])?(?:§\\w)?: ?(.+)$")
     const val BRIDGE_PATTERN =
         ("^ *((?:.+?)(?: attached an? \\w+(?::|$)| replied to .+ with an? \\w+(?::|$)| replied to .+?(?::|$)|:))(?:(?: (.*)?$)|$)")
 
