@@ -66,14 +66,12 @@ object ChatBridge : ModInitializer {
                 if (config.guildChat == ChatBridgeConfig.originalGuild) return message
 
                 val usernameColor: Int = config.guildChat.usernameColor?.toColor()
-                    ?: if (rank.isEmpty()) 0xAAAAAA
+                    ?: if (rank.isNullOrEmpty()) 0xAAAAAA
                     else ChatFormatting.getByCode(lastColorCode(rank)[1])?.color ?: 0xAAAAAA
-
-                logger.info(usernameColor.toString())
 
                 return Component.literal("${config.guildChat.prefix} ")
                     .withColor(config.guildChat.prefixColor.toColor())
-                    .append(Component.literal(if (config.guildChat.hidePlayerRank || rank.isEmpty()) "" else rank))
+                    .append(Component.literal(if (config.guildChat.hidePlayerRank || rank.isNullOrEmpty()) "" else rank))
                     .append(Component.literal(username).withColor(usernameColor))
                     .append(
                         Component.literal(if (config.guildChat.hideGuildRank || guildRank.isEmpty()) "" else " [$guildRank]")
