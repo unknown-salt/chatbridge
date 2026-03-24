@@ -102,7 +102,77 @@ class OtherChatsCategory {
                 .build()
         )
 
+        officer.add(
+            entryBuilder.startTextField(translatable("entry.chatbridge.prefix"), config.officerChat.prefix)
+                .setDefaultValue("Officer >")
+                .setSaveConsumer { value -> config.officerChat.prefix = value.trim() }
+                .build()
+        )
+
+        officer.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.prefixColor"),
+                Integer.decode(config.officerChat.prefixColor)
+            )
+                .setDefaultValue(0x00AAAA)
+                .setSaveConsumer { value -> config.officerChat.prefixColor = String.format("#%06X", value) }
+                .build()
+        )
+
+        officer.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.messageColor"),
+                Integer.decode(config.officerChat.messageColor)
+            )
+                .setDefaultValue(0xFFFFFF)
+                .setSaveConsumer { value -> config.officerChat.messageColor = String.format("#%06X", value) }
+                .build()
+        )
+
+        officer.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.guildRankColor"),
+                Integer.decode(config.officerChat.guildRankColor)
+            )
+                .setDefaultValue(0x00AAAA)
+                .setSaveConsumer { value -> config.officerChat.guildRankColor = String.format("#%06X", value) }
+                .build()
+        )
+
+        officer.add(
+            entryBuilder.startBooleanToggle(
+                translatable("entry.chatbridge.hideGuildRank"),
+                config.officerChat.hideGuildRank
+            )
+                .setDefaultValue(false)
+                .setSaveConsumer { value -> config.officerChat.hideGuildRank = value }
+                .build()
+        )
+
+        officer.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.badUsernameColor"),
+                Integer.decode(config.officerChat.usernameColor ?: "#000000")
+            )
+                .setDefaultValue(0x000000)
+                .setSaveConsumer { value ->
+                    config.officerChat.usernameColor = if (value != 0x000000) String.format("#%06X", value) else null
+                }
+                .build()
+        )
+
+        officer.add(
+            entryBuilder.startBooleanToggle(
+                translatable("entry.chatbridge.hidePlayerRank"),
+                config.officerChat.hidePlayerRank
+            )
+                .setDefaultValue(false)
+                .setSaveConsumer { value -> config.officerChat.hidePlayerRank = value }
+                .build()
+        )
+
         category.addEntry(guild.build())
+        category.addEntry(officer.build())
     }
 
 }

@@ -15,6 +15,8 @@ object ChatBridge : ModInitializer {
     val logger: Logger = LoggerFactory.getLogger("chatbridge")
     const val GUILD_PATTERN =
         ("^(?:§\\w)?(?:G|Guild) > (?:§\\w)?(.+\\[(?:\\S+?)\\] )?(\\w+)(?: §3\\[(\\S+?)\\])?(?:§\\w)?: ?(.+)$")
+    const val OFFICER_PATTERN =
+        ("^(?:§\\w)?(?:Officer) > (?:§\\w)?(.+\\[(?:\\S+?)\\] )?(\\w+)(?: §3\\[(\\S+?)\\])?(?:§\\w)?: ?(.+)$")
     const val BRIDGE_PATTERN =
         ("^ *((?:.+?)(?: attached an? \\w+(?::|$)| replied to .+ with an? \\w+(?::|$)| replied to .+?(?::|$)|:))(?:(?: (.*)?$)|$)")
 
@@ -32,6 +34,7 @@ object ChatBridge : ModInitializer {
             "From" -> ChatChannel.PRIVATE
             "Party" -> ChatChannel.PARTY
             "Guild" -> ChatChannel.GUILD
+            "Officer" -> ChatChannel.OFFICER
             "G" -> ChatChannel.GUILD
             else -> ChatChannel.UNKNOWN
         }
@@ -97,6 +100,31 @@ object ChatBridge : ModInitializer {
                         .withColor(config.messageColor.toColor())
                 )
         }
+
+        if (channel == ChatChannel.OFFICER && config.officerChat != ChatBridgeConfig.originalOfficer) {
+            val match = compile(OFFICER_PATTERN).matcher(message.string)
+            if (!match.matches()) return message
+
+            val rank = match.group(1)
+            val username = match.group(2)
+            val guildRank = match.group(3)
+            val text = match.group(4)
+
+            val usernameColor: Int = config.officerChat.usernameColor?.toColor()
+                ?: if (rank.isNullOrEmpty()) 0xAAAAAA
+                else ChatFormatting.getByCode(lastColorCode(rank)[1])?.color ?: 0xAAAAAA
+
+            return Component.literal("${config.officerChat.prefix} ")
+                .withColor(config.officerChat.prefixColor.toColor())
+                .append(Component.literal(if (config.officerChat.hidePlayerRank || rank.isNullOrEmpty()) "" else rank))
+                .append(Component.literal(username).withColor(usernameColor))
+                .append(
+                    Component.literal(if (config.officerChat.hideGuildRank || guildRank.isEmpty()) "" else " [$guildRank]")
+                        .withColor(config.officerChat.guildRankColor.toColor())
+                )
+                .append(Component.literal(": $text").withColor(config.officerChat.messageColor.toColor()))
+        }
+
         return message
     }
 
@@ -128,7 +156,7 @@ object ChatBridge : ModInitializer {
     }
 
     private enum class ChatChannel {
-        PARTY, GUILD, PRIVATE, UNKNOWN
+        PARTY, GUILD, OFFICER, PRIVATE, UNKNOWN
     }
 
 }

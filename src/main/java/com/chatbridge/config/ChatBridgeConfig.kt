@@ -33,9 +33,12 @@ data class GuildChat(
 
 data class OfficerChat(
     var prefix: String = "Officer >",
-    var prefixColor: String = "#616AC7",
-    var nameColor: String = "#8F99FF",
+    var prefixColor: String = "#00AAAA",
     var messageColor: String = "#C1C3C7",
+    var guildRankColor: String = "#00AAAA",
+    var hideGuildRank: Boolean = false,
+    var usernameColor: String? = null,
+    var hidePlayerRank: Boolean = false,
 )
 
 data class PartyChat(
