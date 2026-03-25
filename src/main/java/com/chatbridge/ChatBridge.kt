@@ -77,7 +77,7 @@ object ChatBridge : ModInitializer {
                     .append(Component.literal(if (config.guildChat.hidePlayerRank || rank.isNullOrEmpty()) "" else rank))
                     .append(Component.literal(username).withColor(usernameColor))
                     .append(
-                        Component.literal(if (config.guildChat.hideGuildRank || guildRank.isEmpty()) "" else " [$guildRank]")
+                        Component.literal(if (config.guildChat.hideGuildRank || guildRank.isNullOrEmpty()) "" else " [$guildRank]")
                             .withColor(config.guildChat.guildRankColor.toColor())
                     )
                     .append(Component.literal(": $text").withColor(config.guildChat.messageColor.toColor()))
@@ -119,7 +119,7 @@ object ChatBridge : ModInitializer {
                 .append(Component.literal(if (config.officerChat.hidePlayerRank || rank.isNullOrEmpty()) "" else rank))
                 .append(Component.literal(username).withColor(usernameColor))
                 .append(
-                    Component.literal(if (config.officerChat.hideGuildRank || guildRank.isEmpty()) "" else " [$guildRank]")
+                    Component.literal(if (config.officerChat.hideGuildRank || guildRank.isNullOrEmpty()) "" else " [$guildRank]")
                         .withColor(config.officerChat.guildRankColor.toColor())
                 )
                 .append(Component.literal(": $text").withColor(config.officerChat.messageColor.toColor()))
