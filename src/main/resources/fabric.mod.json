@@ -8,7 +8,9 @@
     "FanerXp"
   ],
   "contact": {
-    "sources": "https://github.com/unknown-salt/chatbridge"
+    "homepage": "https://modrinth.com/mod/chatbridge-ws",
+    "sources": "https://github.com/unknown-salt/chatbridge",
+    "issues": "https://github.com/unknown-salt/chatbridge/issues"
   },
   "license": "MIT",
   "icon": "assets/chatbridge/icon.png",
@@ -31,5 +33,12 @@
     "java": ">=21",
     "fabric-api": "*",
     "fabric-language-kotlin": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/mod/chatbridge-ws"
+      }
+    }
   }
 }
