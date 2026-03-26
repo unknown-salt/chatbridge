@@ -19,6 +19,8 @@ object ChatBridge : ModInitializer {
         ("^(?:§\\w)?(?:Officer) > ((?:§\\w)?\\[(?:\\S+?)\\] )?(?:§\\w)?(\\w+)(?: §3\\[(\\S+?)\\])?(?:§\\w)?: ?(.+)$")
     const val BRIDGE_PATTERN =
         ("^ *((?:.+?)(?: attached an? \\w+(?::|$)| replied to .+ with an? \\w+(?::|$)| replied to .+?(?::|$)|:))(?:(?: (.*)?$)|$)")
+    const val PARTY_PATTERN =
+        ("^(?:§\\w)?(?:Party) (?:§\\w)?> ((?:§\\w)?\\[(?:\\S+?)\\] )?(?:§\\w)?(\\w+)(?:§\\w)?: ?(.+)$")
 
     override fun onInitialize() {
         ChatBridgeConfig.load()
@@ -123,6 +125,29 @@ object ChatBridge : ModInitializer {
                         .withColor(config.officerChat.guildRankColor.toColor())
                 )
                 .append(Component.literal(": $text").withColor(config.officerChat.messageColor.toColor()))
+        }
+
+        if (channel == ChatChannel.PARTY && config.partyChat != ChatBridgeConfig.originalParty) {
+            val match = compile(PARTY_PATTERN).matcher(message.string)
+            if (!match.matches()) return message
+
+            val rank = match.group(1)
+            val username = match.group(2)
+            val text = match.group(3)
+
+            val prefix = if (config.partyChat.prefix == ChatBridgeConfig.originalParty.prefix)
+                Component.literal("Party ").withColor(config.partyChat.prefixColor.toColor())
+                    .append(Component.literal("> ").withColor(0x555555))
+            else Component.literal(config.partyChat.prefix).withColor(config.partyChat.prefixColor.toColor())
+
+            val usernameColor: Int = config.partyChat.usernameColor?.toColor()
+                ?: if (rank.isNullOrEmpty()) 0xAAAAAA
+                else ChatFormatting.getByCode(lastColorCode(rank)[1])?.color ?: 0xAAAAAA
+
+            return prefix
+                .append(Component.literal(if (config.partyChat.hidePlayerRank || rank.isNullOrEmpty()) "" else rank))
+                .append(Component.literal(username).withColor(usernameColor))
+                .append(Component.literal(": $text").withColor(config.partyChat.messageColor.toColor()))
         }
 
         return message

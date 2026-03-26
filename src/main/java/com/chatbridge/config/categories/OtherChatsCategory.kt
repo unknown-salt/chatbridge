@@ -171,8 +171,58 @@ class OtherChatsCategory {
                 .build()
         )
 
+        party.add(
+            entryBuilder.startTextField(translatable("entry.chatbridge.prefix"), config.partyChat.prefix)
+                .setDefaultValue("Party >")
+                .setSaveConsumer { value -> config.partyChat.prefix = value.trim() }
+                .build()
+        )
+
+        party.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.prefixColor"),
+                Integer.decode(config.partyChat.prefixColor)
+            )
+                .setDefaultValue(0x5555FF)
+                .setSaveConsumer { value -> config.partyChat.prefixColor = String.format("#%06X", value) }
+                .build()
+        )
+
+        party.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.messageColor"),
+                Integer.decode(config.partyChat.messageColor)
+            )
+                .setDefaultValue(0xFFFFFF)
+                .setSaveConsumer { value -> config.partyChat.messageColor = String.format("#%06X", value) }
+                .build()
+        )
+
+        party.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.badUsernameColor"),
+                Integer.decode(config.partyChat.usernameColor ?: "#000000")
+            )
+                .setDefaultValue(0x000000)
+                .setSaveConsumer { value ->
+                    config.partyChat.usernameColor = if (value != 0x000000) String.format("#%06X", value) else null
+                }
+                .build()
+        )
+
+        party.add(
+            entryBuilder.startBooleanToggle(
+                translatable("entry.chatbridge.hidePlayerRank"),
+                config.partyChat.hidePlayerRank
+            )
+                .setDefaultValue(false)
+                .setSaveConsumer { value -> config.partyChat.hidePlayerRank = value }
+                .build()
+        )
+
         category.addEntry(guild.build())
         category.addEntry(officer.build())
+        category.addEntry(party.build())
     }
 
 }
