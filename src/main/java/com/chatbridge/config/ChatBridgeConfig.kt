@@ -20,7 +20,16 @@ data class Config(
 )
 
 data class Extras(
-    var discordWarnings: Boolean = true
+    var discordWarnings: Boolean = true,
+    var timestamp: Timestamp = Timestamp()
+)
+
+data class Timestamp(
+    var enabled: Boolean = false,
+    var format: String = "[HH:mm:ss]",
+    var color: String = "#FF55FF",
+    var numbersColor: String = "#FF33FF",
+    var ignoreEmpty: Boolean = false,
 )
 
 data class GuildChat(

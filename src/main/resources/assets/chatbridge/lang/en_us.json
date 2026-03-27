@@ -1,7 +1,7 @@
 {
   "title.chatbridge.config": "Chat Bridge",
   "category.chatbridge.general": "Bot Messages",
-  "entry.chatbridge.bridgeEnabled": "Enabled",
+  "entry.chatbridge.enabled": "Enabled",
   "tooltip.chatbridge.bridgeEnabled": "Enable bot message formatting",
   "entry.chatbridge.botNames": "Bot Names",
   "tooltip.chatbridge.botNames": "List of Bot (separate with spaces)",
@@ -24,5 +24,11 @@
   "entry.chatbridge.receivePrefix": "Prefix for receiving",
   "entry.chatbridge.sendPrefix": "Prefix for sending",
   "category.chatbridge.extras": "Extras",
-  "entry.chatbridge.extras.discordWarnings": "Hide warnings about discord links"
+  "entry.chatbridge.extras.discordWarnings": "Hide warnings about discord links",
+  "entry.chatbridge.timestamp": "Timestamp",
+  "entry.chatbridge.timestamp.format": "Timestamp Format",
+  "entry.chatbridge.timestamp.color": "Timestamp Decoration Color",
+  "entry.chatbridge.timestamp.numbersColor": "Timestamp Numbers Color",
+  "entry.chatbridge.timestamp.ignoreEmpty": "Ignore Empty Lines",
+  "description.chatbridge.timestamp": "The timestamp supports the following patterns:\nHH - Hour (0-23)\nhh - Hour (1-12)\nmm - Minute (08)\nss - Second (01)\nms - Millisecond (0826)\na - AM/PM marker\n\nyyyy - Four-digit year (2026)\nyy - Two-digit year (26)\nMM - Month number (03)\nMMM - Short month name (Mar)\nMMMM - Full month name (March)\ndd - Day of month (07)\nEEEE - Day of week (Friday)\n\nAnd more..."
 }

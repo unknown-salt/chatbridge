@@ -23,26 +23,42 @@ object ChatBridge : ModInitializer {
     private fun onModify(message: Component, actionBar: Boolean): Component {
         if (actionBar) return message
 
-        val unformatted = compile("§\\w").matcher(message.string).replaceAll("")
+        try {
+            val unformatted = compile("§\\w").matcher(message.string).replaceAll("")
 
-        val channel = when (unformatted.split(" ")[0]) {
-            "Guild" -> ChatChannel.GUILD
-            "Officer" -> ChatChannel.OFFICER
-            "Party" -> ChatChannel.PARTY
-            "From" -> ChatChannel.PRIVATE
-            "To" -> ChatChannel.PRIVATE
-            "G" -> ChatChannel.GUILD
-            else -> ChatChannel.UNKNOWN
+            val channel = when (unformatted.split(" ")[0]) {
+                "Guild" -> ChatChannel.GUILD
+                "Officer" -> ChatChannel.OFFICER
+                "Party" -> ChatChannel.PARTY
+                "From" -> ChatChannel.PRIVATE
+                "To" -> ChatChannel.PRIVATE
+                "G" -> ChatChannel.GUILD
+                else -> ChatChannel.UNKNOWN
+            }
+
+            var formatted = message
+
+            if (channel != ChatChannel.UNKNOWN) formatted = ChatFormatter().format(formatted, channel)
+
+            if (config.extras.discordWarnings && message.string.split("\n").size > 1) formatted =
+                Extras().removeDiscordWarning(formatted) ?: formatted
+
+            if (config.extras.timestamp.enabled && !(config.extras.timestamp.ignoreEmpty && message.string.trim() == ""))
+                formatted = try {
+                    Component.empty()
+                        .append(Extras().timestampComponent())
+                        .append(Component.literal(" "))
+                        .append(formatted)
+                } catch (e: Exception) {
+                    logger.warn("Failed to apply timestamp formatting", e)
+                    formatted`
+                }
+
+            return formatted
+        } catch (e: Exception) {
+            logger.error("Failed to format chat message, sending original", e)
+            return message
         }
-
-        var formatted = message
-
-        if (channel != ChatChannel.UNKNOWN) formatted = ChatFormatter().format(formatted, channel)
-
-        if (config.extras.discordWarnings && message.string.split("\n").size > 1) formatted =
-            Extras().removeDiscordWarning(formatted) ?: formatted
-
-        return formatted
     }
 
     fun hasCloth(): Boolean {

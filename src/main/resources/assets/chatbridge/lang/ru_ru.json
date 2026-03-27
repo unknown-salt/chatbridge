@@ -1,7 +1,7 @@
 {
   "title.chatbridge.config": "Chat Bridge",
   "category.chatbridge.general": "Форматирование Сообщений Ботов",
-  "entry.chatbridge.bridgeEnabled": "Включено",
+  "entry.chatbridge.enabled": "Включено",
   "tooltip.chatbridge.bridgeEnabled": "Включить форматирование сообщений ботов",
   "entry.chatbridge.botNames": "Имена Ботов",
   "tooltip.chatbridge.botNames": "Список имён ботов (Разделить пробелами)",
@@ -24,5 +24,11 @@
   "entry.chatbridge.receivePrefix": "Префикс при получении",
   "entry.chatbridge.sendPrefix": "Префикс при отправке",
   "category.chatbridge.extras": "Дополнительно",
-  "entry.chatbridge.extras.discordWarnings": "Скрыть предупреждения о discord ссылках"
+  "entry.chatbridge.extras.discordWarnings": "Скрыть предупреждения о discord ссылках",
+  "entry.chatbridge.timestamp": "Метка Времени",
+  "entry.chatbridge.timestamp.format": "Формат Метки Времени",
+  "entry.chatbridge.timestamp.color": "Цвет Декорации Метки Времени",
+  "entry.chatbridge.timestamp.numbersColor": "Цвет Чисел Метки Времени",
+  "entry.chatbridge.timestamp.ignoreEmpty": "Игнорировать Пустые Строки",
+  "description.chatbridge.timestamp": "Метка времени поддерживает следующие форматы:\nHH - Час (0-23)\nhh - Час (1-12)\nmm - Минута (08)\nss - Секунда (01)\nms - Миллисекунда (0826)\na - Обозначение AM/PM\n\nyyyy - Четырехзначный год (2026)\nyy - Двухзначный год (26)\nMM - Номер месяца (03)\nMMM - Сокращенное название месяца (Мар)\nMMMM - Полное название месяца (Март)\ndd - День месяца (07)\nEEEE - День недели (Пятница)\n\nИ другие..."
 }

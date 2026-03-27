@@ -12,7 +12,7 @@ class GeneralCategory {
     ) {
         category.addEntry(
             entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.bridgeEnabled"),
+                translatable("entry.chatbridge.enabled"),
                 config.bridgeEnabled
             )
                 .setDefaultValue(true)

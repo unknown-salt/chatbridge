@@ -1,7 +1,7 @@
 {
   "title.chatbridge.config": "Chat Bridge",
   "category.chatbridge.general": "Форматування Повідомлень Ботів",
-  "entry.chatbridge.bridgeEnabled": "Увімкнено",
+  "entry.chatbridge.enabled": "Увімкнено",
   "tooltip.chatbridge.bridgeEnabled": "Увімкнути форматування повідомлень ботів",
   "entry.chatbridge.botNames": "Імена Ботів",
   "tooltip.chatbridge.botNames": "Список імен ботів (Розділити пробілами)",
@@ -24,5 +24,11 @@
   "entry.chatbridge.receivePrefix": "Префікс при отриманні",
   "entry.chatbridge.sendPrefix": "Префікс для відправлення",
   "category.chatbridge.extras": "Додатково",
-  "entry.chatbridge.extras.discordWarnings": "Приховати попередження про discord посилання"
+  "entry.chatbridge.extras.discordWarnings": "Приховати попередження про discord посилання",
+  "entry.chatbridge.timestamp": "Позначка Часу",
+  "entry.chatbridge.timestamp.format": "Формат Позначки",
+  "entry.chatbridge.timestamp.color": "Колір декорації Позначки",
+  "entry.chatbridge.timestamp.numbersColor": "Ігнорувати Порожні Строки",
+  "entry.chatbridge.timestamp.ignoreEmpty": "Ignore Empty Lines",
+  "description.chatbridge.timestamp": "Мітка часу підтримує такі формати:\nHH - Година (0-23)\nhh - Година (1-12)\nmm - Хвилина (08)\nss - Секунда (01)\nms - Мілісекунда (0826)\na - Позначення AM/PM\n\nyyyy - Чотиризначний рік (2026)\nyy - Двозначний рік (26)\nMM - Номер місяця (03)\nMMM - Скорочена назва місяця (Бер)\nMMMM - Повна назва місяця (Березень)\ndd - День місяця (07)\nEEEE - День тижня (П'ятниця)\n\nта інші..."
 }
