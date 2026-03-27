@@ -22,5 +22,7 @@
   "entry.chatbridge.hideGuildRank": "Hide Guild Rank",
   "entry.chatbridge.hidePlayerRank": "Hide Player Rank (Not Recommended)",
   "entry.chatbridge.receivePrefix": "Prefix for receiving",
-  "entry.chatbridge.sendPrefix": "Prefix for sending"
+  "entry.chatbridge.sendPrefix": "Prefix for sending",
+  "category.chatbridge.extras": "Extras",
+  "entry.chatbridge.extras.discordWarnings": "Hide warnings about discord links"
 }

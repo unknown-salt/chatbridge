@@ -22,5 +22,7 @@
   "entry.chatbridge.hideGuildRank": "Скрыть Ранг Игрока в Гильдии",
   "entry.chatbridge.hidePlayerRank": "Скрыть Ранг Игрока (Не Рекомендуется)",
   "entry.chatbridge.receivePrefix": "Префикс при получении",
-  "entry.chatbridge.sendPrefix": "Префикс при отправке"
+  "entry.chatbridge.sendPrefix": "Префикс при отправке",
+  "category.chatbridge.extras": "Дополнительно",
+  "entry.chatbridge.extras.discordWarnings": "Скрыть предупреждения о discord ссылках"
 }

@@ -1,4 +1,4 @@
-package com.chatbridge.formatter
+package com.chatbridge.utils
 
 import com.chatbridge.ChatBridge.ChatChannel
 import com.chatbridge.ChatBridge.findColor
@@ -22,8 +22,10 @@ class ChatFormatter {
         ("^(From|To)(?: \\[([^+\\s]+?)(\\+{1,4})?\\])? (\\w+): (.+)$")
 
     fun format(message: Component, channel: ChatChannel): Component {
+        val messageText = message.string.split("\n").first()
+
         if (channel == ChatChannel.GUILD) {
-            val notifMatch = compile("^(?:G|Guild) > (\\w+) (joined.|left.)").matcher(message.string)
+            val notifMatch = compile("^(?:G|Guild) > (\\w+) (joined.|left.)").matcher(messageText)
             if (config.guildChat != ChatBridgeConfig.originalGuild && notifMatch.matches()) {
                 return Component.literal("${config.guildChat.prefix} ")
                     .withColor(config.guildChat.prefixColor.toColor())
@@ -40,7 +42,7 @@ class ChatFormatter {
                     )
 
             }
-            val match = compile(GUILD_PATTERN).matcher(message.string)
+            val match = compile(GUILD_PATTERN).matcher(messageText)
             if (!match.matches()) return message
 
             val rank = match.group(1)
@@ -85,7 +87,7 @@ class ChatFormatter {
         }
 
         if (channel == ChatChannel.OFFICER && config.officerChat != ChatBridgeConfig.originalOfficer) {
-            val match = compile(OFFICER_PATTERN).matcher(message.string)
+            val match = compile(OFFICER_PATTERN).matcher(messageText)
             if (!match.matches()) return message
 
             val rank = match.group(1)
@@ -109,7 +111,7 @@ class ChatFormatter {
         }
 
         if (channel == ChatChannel.PARTY && config.partyChat != ChatBridgeConfig.originalParty) {
-            val match = compile(PARTY_PATTERN).matcher(message.string)
+            val match = compile(PARTY_PATTERN).matcher(messageText)
             if (!match.matches()) return message
 
             val rank = match.group(1)
@@ -132,7 +134,7 @@ class ChatFormatter {
         }
 
         if (channel == ChatChannel.PRIVATE && config.privateChat != ChatBridgeConfig.originalPrivate) {
-            val match = compile(PRIVATE_PATTERN).matcher(message.string)
+            val match = compile(PRIVATE_PATTERN).matcher(messageText)
             if (!match.matches()) return message
 
             val isFrom = match.group(1) == "From"

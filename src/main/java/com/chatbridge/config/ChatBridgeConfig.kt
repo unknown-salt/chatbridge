@@ -15,9 +15,13 @@ data class Config(
     var guildChat: GuildChat = GuildChat(),
     var officerChat: OfficerChat = OfficerChat(),
     var partyChat: PartyChat = PartyChat(),
-    var privateChat: PrivateChat = PrivateChat()
+    var privateChat: PrivateChat = PrivateChat(),
+    var extras: Extras = Extras()
 )
 
+data class Extras(
+    var discordWarnings: Boolean = true
+)
 
 data class GuildChat(
     var prefix: String = "Guild >",

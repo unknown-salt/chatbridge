@@ -1,13 +1,15 @@
 package com.chatbridge
 
 import com.chatbridge.config.ChatBridgeConfig
-import com.chatbridge.formatter.ChatFormatter
+import com.chatbridge.utils.ChatFormatter
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.minecraft.network.chat.Component
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.util.regex.Pattern.compile
+import com.chatbridge.config.ChatBridgeConfig.config
+import com.chatbridge.utils.Extras
 
 
 object ChatBridge : ModInitializer {
@@ -33,9 +35,14 @@ object ChatBridge : ModInitializer {
             else -> ChatChannel.UNKNOWN
         }
 
-        if (channel != ChatChannel.UNKNOWN) return ChatFormatter().format(message, channel)
+        var formatted = message
 
-        return message
+        if (channel != ChatChannel.UNKNOWN) formatted = ChatFormatter().format(formatted, channel)
+
+        if (config.extras.discordWarnings && message.string.split("\n").size > 1) formatted =
+            Extras().removeDiscordWarning(formatted) ?: formatted
+
+        return formatted
     }
 
     fun hasCloth(): Boolean {
