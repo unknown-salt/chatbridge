@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory
 import java.util.regex.Pattern.compile
 import com.chatbridge.config.ChatBridgeConfig.config
 import com.chatbridge.utils.Extras
+import com.chatbridge.utils.ChatBridgeCommands
 
 
 object ChatBridge : ModInitializer {
@@ -17,6 +18,7 @@ object ChatBridge : ModInitializer {
 
     override fun onInitialize() {
         ChatBridgeConfig.load()
+        ChatBridgeCommands().register()
         ClientReceiveMessageEvents.MODIFY_GAME.register(::onModify)
     }
 
@@ -51,7 +53,7 @@ object ChatBridge : ModInitializer {
                         .append(formatted)
                 } catch (e: Exception) {
                     logger.warn("Failed to apply timestamp formatting", e)
-                    formatted`
+                    formatted
                 }
 
             return formatted
@@ -80,7 +82,6 @@ object ChatBridge : ModInitializer {
         if (component.string.trim() == text) return component.style.color?.value
         return component.siblings.firstNotNullOfOrNull { findColor(it, text) }
     }
-
 
     enum class ChatChannel {
         PARTY, GUILD, OFFICER, PRIVATE, UNKNOWN

@@ -29,6 +29,4 @@ object ChatBridgeConfigManager {
 
         return builder.build()
     }
-
-
 }
