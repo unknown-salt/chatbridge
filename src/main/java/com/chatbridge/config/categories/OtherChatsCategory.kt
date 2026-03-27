@@ -5,7 +5,6 @@ import me.shedaniel.clothconfig2.api.ConfigCategory
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder
 import net.minecraft.network.chat.Component.translatable
 
-
 class OtherChatsCategory {
     fun build(
         category: ConfigCategory,
