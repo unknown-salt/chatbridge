@@ -20,5 +20,7 @@
   "entry.chatbridge.guildNotificationColor": "Joined/Left Message Color",
   "entry.chatbridge.badUsernameColor": "Username Color (Not Recommended)",
   "entry.chatbridge.hideGuildRank": "Hide Guild Rank",
-  "entry.chatbridge.hidePlayerRank": "Hide Player Rank (Not Recommended)"
+  "entry.chatbridge.hidePlayerRank": "Hide Player Rank (Not Recommended)",
+  "entry.chatbridge.receivePrefix": "Prefix for receiving",
+  "entry.chatbridge.sendPrefix": "Prefix for sending"
 }

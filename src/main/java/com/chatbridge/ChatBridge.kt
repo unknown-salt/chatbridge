@@ -21,6 +21,8 @@ object ChatBridge : ModInitializer {
         ("^ *((?:.+?)(?: attached an? \\w+(?::|$)| replied to .+ with an? \\w+(?::|$)| replied to .+?(?::|$)|:))(?:(?: (.*)?$)|$)")
     const val PARTY_PATTERN =
         ("^(?:§\\w)?(?:Party) (?:§\\w)?> ((?:§\\w)?\\[(?:\\S+?)\\] )?(?:§\\w)?(\\w+)(?:§\\w)?: ?(.+)$")
+    const val PRIVATE_PATTERN =
+        ("^(From|To)(?: \\[([^+\\s]+?)(\\+{1,4})?\\])? (\\w+): (.+)$")
 
     override fun onInitialize() {
         ChatBridgeConfig.load()
@@ -33,10 +35,11 @@ object ChatBridge : ModInitializer {
         val unformatted = compile("§\\w").matcher(message.string).replaceAll("")
 
         val channel = when (unformatted.split(" ")[0]) {
-            "From" -> ChatChannel.PRIVATE
-            "Party" -> ChatChannel.PARTY
             "Guild" -> ChatChannel.GUILD
             "Officer" -> ChatChannel.OFFICER
+            "Party" -> ChatChannel.PARTY
+            "From" -> ChatChannel.PRIVATE
+            "To" -> ChatChannel.PRIVATE
             "G" -> ChatChannel.GUILD
             else -> ChatChannel.UNKNOWN
         }
@@ -138,7 +141,7 @@ object ChatBridge : ModInitializer {
             val prefix = if (config.partyChat.prefix == ChatBridgeConfig.originalParty.prefix)
                 Component.literal("Party ").withColor(config.partyChat.prefixColor.toColor())
                     .append(Component.literal("> ").withColor(0x555555))
-            else Component.literal(config.partyChat.prefix).withColor(config.partyChat.prefixColor.toColor())
+            else Component.literal("${config.partyChat.prefix} ").withColor(config.partyChat.prefixColor.toColor())
 
             val usernameColor: Int = config.partyChat.usernameColor?.toColor()
                 ?: if (rank.isNullOrEmpty()) 0xAAAAAA
@@ -148,6 +151,46 @@ object ChatBridge : ModInitializer {
                 .append(Component.literal(if (config.partyChat.hidePlayerRank || rank.isNullOrEmpty()) "" else rank))
                 .append(Component.literal(username).withColor(usernameColor))
                 .append(Component.literal(": $text").withColor(config.partyChat.messageColor.toColor()))
+        }
+
+        if (channel == ChatChannel.PRIVATE && config.privateChat != ChatBridgeConfig.originalPrivate) {
+            val match = compile(PRIVATE_PATTERN).matcher(message.string)
+            if (!match.matches()) return message
+
+            val isFrom = match.group(1) == "From"
+            val rankName = match.group(2)
+            val plus = match.group(3)
+            val username = match.group(4)
+            val text = match.group(5)
+
+            val bracketsColor =
+                if (!rankName.isNullOrEmpty()) findColor(message, "] $username") ?: findColor(message, "[")
+                ?: 0xAAAAAA else 0xAAAAAA
+
+            val rank = when {
+                config.privateChat.hidePlayerRank || rankName.isNullOrEmpty() -> Component.literal("")
+                else ->
+                    Component.literal("[").withColor(bracketsColor)
+                        .append(Component.literal(rankName).withColor(findColor(message, rankName) ?: bracketsColor))
+                        .append(
+                            Component.literal(plus ?: "")
+                                .withColor(if (plus.isNullOrEmpty()) 0xFF5555 else findColor(message, plus) ?: 0xFF5555)
+                        )
+                        .append(Component.literal("] ").withColor(bracketsColor))
+            }
+
+
+            val usernameColor: Int =
+                config.privateChat.usernameColor?.toColor() ?: findColor(
+                    message,
+                    if (rankName.isNullOrEmpty()) username else "] $username"
+                ) ?: 0xAAAAAA
+
+            return Component.literal("${if (isFrom) config.privateChat.receivePrefix else config.privateChat.sendPrefix} ")
+                .withColor(config.privateChat.prefixColor.toColor())
+                .append(rank)
+                .append(Component.literal(username).withColor(usernameColor))
+                .append(Component.literal(": $text").withColor(config.privateChat.messageColor.toColor()))
         }
 
         return message
@@ -169,10 +212,7 @@ object ChatBridge : ModInitializer {
     }
 
     fun findColor(component: Component, text: String): Int? {
-        if (component.string.trim().equals(text, ignoreCase = true)) {
-            return component.style.color?.value
-        }
-
+        if (component.string.trim() == text) return component.style.color?.value
         return component.siblings.firstNotNullOfOrNull { findColor(it, text) }
     }
 

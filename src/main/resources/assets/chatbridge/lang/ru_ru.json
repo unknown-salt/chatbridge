@@ -20,5 +20,7 @@
   "entry.chatbridge.guildNotificationColor": "Цвет Сообщений Зашёл/Вышел",
   "entry.chatbridge.badUsernameColor": "Цвет Никнейма (Не Рекомендуется)",
   "entry.chatbridge.hideGuildRank": "Скрыть Ранг Игрока в Гильдии",
-  "entry.chatbridge.hidePlayerRank": "Скрыть Ранг Игрока (Не Рекомендуется)"
+  "entry.chatbridge.hidePlayerRank": "Скрыть Ранг Игрока (Не Рекомендуется)",
+  "entry.chatbridge.receivePrefix": "Префикс при получении",
+  "entry.chatbridge.sendPrefix": "Префикс при отправке"
 }

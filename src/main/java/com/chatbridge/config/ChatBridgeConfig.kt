@@ -50,10 +50,12 @@ data class PartyChat(
 )
 
 data class PrivateChat(
-    var prefix: String = "From >",
-    var prefixColor: String = "#616AC7",
-    var nameColor: String = "#8F99FF",
-    var messageColor: String = "#C1C3C7",
+    var receivePrefix: String = "From >",
+    var sendPrefix: String = "To >",
+    var prefixColor: String = "#FF55FF",
+    var messageColor: String = "#AAAAAA",
+    var usernameColor: String? = null,
+    var hidePlayerRank: Boolean = false,
 )
 
 object ChatBridgeConfig {

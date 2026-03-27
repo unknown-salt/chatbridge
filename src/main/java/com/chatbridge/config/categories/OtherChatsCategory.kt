@@ -21,7 +21,7 @@ class OtherChatsCategory {
             entryBuilder.startSubCategory(translatable("entry.chatbridge.partyChat")).setExpanded(false)
 
         val private =
-            entryBuilder.startSubCategory(translatable("entry.chatbridge.private")).setExpanded(false)
+            entryBuilder.startSubCategory(translatable("entry.chatbridge.privateChat")).setExpanded(false)
 
         guild.add(
             entryBuilder.startTextField(translatable("entry.chatbridge.prefix"), config.guildChat.prefix)
@@ -220,9 +220,72 @@ class OtherChatsCategory {
                 .build()
         )
 
+        private.add(
+            entryBuilder.startTextField(
+                translatable("entry.chatbridge.receivePrefix"),
+                config.privateChat.receivePrefix
+            )
+                .setDefaultValue("From >")
+                .setSaveConsumer { value -> config.privateChat.receivePrefix = value.trim() }
+                .build()
+        )
+
+        private.add(
+            entryBuilder.startTextField(
+                translatable("entry.chatbridge.sendPrefix"),
+                config.privateChat.sendPrefix
+            )
+                .setDefaultValue("To >")
+                .setSaveConsumer { value -> config.privateChat.sendPrefix = value.trim() }
+                .build()
+        )
+
+        private.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.prefixColor"),
+                Integer.decode(config.privateChat.prefixColor)
+            )
+                .setDefaultValue(0xFF55FF)
+                .setSaveConsumer { value -> config.privateChat.prefixColor = String.format("#%06X", value) }
+                .build()
+        )
+
+        private.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.messageColor"),
+                Integer.decode(config.privateChat.messageColor)
+            )
+                .setDefaultValue(0xAAAAAA)
+                .setSaveConsumer { value -> config.privateChat.messageColor = String.format("#%06X", value) }
+                .build()
+        )
+
+        private.add(
+            entryBuilder.startColorField(
+                translatable("entry.chatbridge.badUsernameColor"),
+                Integer.decode(config.privateChat.usernameColor ?: "#000000")
+            )
+                .setDefaultValue(0x000000)
+                .setSaveConsumer { value ->
+                    config.privateChat.usernameColor = if (value != 0x000000) String.format("#%06X", value) else null
+                }
+                .build()
+        )
+
+        private.add(
+            entryBuilder.startBooleanToggle(
+                translatable("entry.chatbridge.hidePlayerRank"),
+                config.privateChat.hidePlayerRank
+            )
+                .setDefaultValue(false)
+                .setSaveConsumer { value -> config.privateChat.hidePlayerRank = value }
+                .build()
+        )
+
         category.addEntry(guild.build())
         category.addEntry(officer.build())
         category.addEntry(party.build())
+        category.addEntry(private.build())
     }
 
 }

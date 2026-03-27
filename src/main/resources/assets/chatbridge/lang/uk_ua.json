@@ -20,5 +20,7 @@
   "entry.chatbridge.guildNotificationColor": "Колір Повідомлень Зайшов/Вийшов",
   "entry.chatbridge.badUsernameColor": "Колір Нікнейма (Не Рекомендується)",
   "entry.chatbridge.hideGuildRank": "Приховати Ранг Гравця в Гільдії",
-  "entry.chatbridge.hidePlayerRank": "Приховати Ранг Гравця (Не Рекомендується)"
+  "entry.chatbridge.hidePlayerRank": "Приховати Ранг Гравця (Не Рекомендується)",
+  "entry.chatbridge.receivePrefix": "Префікс при отриманні",
+  "entry.chatbridge.sendPrefix": "Префікс для відправлення"
 }
