@@ -28,11 +28,11 @@ class ChatFormatterSmokeTest {
 
     @Test
     fun partyPatternMatchesAndKeepsGroupIndexes() {
-        val match = ChatFormatter.PARTY_PATTERN.matcher("Party > [VIP] Gygi4: Gusic better music bot")
+        val match = ChatFormatter.PARTY_PATTERN.matcher("Party > [VIP] Gygi4: Gusic the best music bot")
         assertTrue(match.matches())
         assertEquals("[VIP] ", match.group(1))
         assertEquals("Gygi4", match.group(2))
-        assertEquals("Gusic better music bot", match.group(3))
+        assertEquals("Gusic the best music bot", match.group(3))
     }
 
     @Test
