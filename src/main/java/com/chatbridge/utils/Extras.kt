@@ -12,24 +12,24 @@ class Extras {
         val text = (component.contents as? PlainTextContents.LiteralContents)?.text
         if (text == "Please be mindful of Discord links in chat as they may pose a security risk") return null
 
-        return component.copy().apply {
-            siblings.clear()
+        val result = component.copy()
+        result.siblings.clear()
 
-            component.siblings.fold(mutableListOf<MutableComponent>()) { acc, child ->
-                val contain = (child.contents as? PlainTextContents.LiteralContents)?.text
-                val processed = removeDiscordWarning(child)
+        for (child in component.siblings) {
+            val contain = (child.contents as? PlainTextContents.LiteralContents)?.text
+            val processed = removeDiscordWarning(child)
 
-                when {
-                    processed == null -> {
-                        if (acc.lastOrNull()?.string == "\n") acc.removeLast()
-                    }
-
-                    contain == "\n" -> acc.add(Component.literal("\n"))
-                    else -> processed.let { acc.add(it) }
+            when {
+                processed == null -> {
+                    if (result.siblings.lastOrNull()?.string == "\n") result.siblings.removeLast()
                 }
-                acc
-            }.forEach { append(it) }
+
+                contain == "\n" -> result.append(Component.literal("\n"))
+                else -> result.append(processed)
+            }
         }
+
+        return result
     }
 
     fun timestampComponent(): Component {
@@ -65,10 +65,5 @@ class Extras {
         flushBuffer()
 
         return result
-    }
-
-
-    private fun String.toColor(): Int {
-        return Integer.decode(this)
     }
 }

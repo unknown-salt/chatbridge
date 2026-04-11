@@ -11,10 +11,7 @@ class GeneralCategory {
         entryBuilder: ConfigEntryBuilder,
     ) {
         category.addEntry(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.enabled"),
-                config.bridgeEnabled
-            )
+            entryBuilder.startBooleanToggle(translatable("entry.chatbridge.enabled"), config.bridgeEnabled)
                 .setDefaultValue(true)
                 .setTooltip(translatable("tooltip.chatbridge.bridgeEnabled"))
                 .setSaveConsumer { value -> config.bridgeEnabled = value }
@@ -22,58 +19,21 @@ class GeneralCategory {
         )
 
         category.addEntry(
-            entryBuilder.startTextField(
-                translatable("entry.chatbridge.botNames"),
-                config.botNames.joinToString(" ")
-            )
+            entryBuilder.startTextField(translatable("entry.chatbridge.botNames"), config.botNames.joinToString(" "))
                 .setTooltip(translatable("tooltip.chatbridge.botNames"))
-                .setSaveConsumer { value -> config.botNames = value.lowercase().split(" ") }
+                .setSaveConsumer { value ->
+                    config.botNames = value.lowercase().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }
+                }
                 .build()
         )
 
-        category.addEntry(
-            entryBuilder.startTextField(translatable("entry.chatbridge.prefix"), config.prefix)
-                .setDefaultValue("Bridge >")
-                .setSaveConsumer { value -> config.prefix = value.trim() }
-                .build()
-        )
+        category.addEntry(entryBuilder.trimmedTextEntry("entry.chatbridge.prefix", config.prefix, "Bridge >") { config.prefix = it })
+        category.addEntry(entryBuilder.colorEntry("entry.chatbridge.prefixColor", config.prefixColor, 0x616AC7) { config.prefixColor = it })
+        category.addEntry(entryBuilder.colorEntry("entry.chatbridge.nameColor", config.nameColor, 0x8F99FF) { config.nameColor = it })
+        category.addEntry(entryBuilder.colorEntry("entry.chatbridge.messageColor", config.messageColor, 0xC1C3C7) { config.messageColor = it })
 
         category.addEntry(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.prefixColor"),
-                Integer.decode(config.prefixColor)
-            )
-                .setDefaultValue(0x616AC7)
-                .setSaveConsumer { value -> config.prefixColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        category.addEntry(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.nameColor"),
-                Integer.decode(config.nameColor)
-            )
-                .setDefaultValue(0x8F99FF)
-                .setSaveConsumer { value -> config.nameColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        category.addEntry(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.messageColor"),
-                Integer.decode(config.messageColor)
-            )
-                .setDefaultValue(0xC1C3C7)
-                .setSaveConsumer { value -> config.messageColor = String.format("#%06X", value) }
-                .build()
-        )
-
-
-        category.addEntry(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.hideBotName"),
-                config.hideBotName
-            )
+            entryBuilder.startBooleanToggle(translatable("entry.chatbridge.hideBotName"), config.hideBotName)
                 .setDefaultValue(false)
                 .setTooltip(translatable("tooltip.chatbridge.hideBotName"))
                 .setSaveConsumer { value -> config.hideBotName = value }

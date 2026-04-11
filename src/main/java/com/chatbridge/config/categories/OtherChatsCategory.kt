@@ -10,281 +10,44 @@ class OtherChatsCategory {
         category: ConfigCategory,
         entryBuilder: ConfigEntryBuilder,
     ) {
-        val guild =
-            entryBuilder.startSubCategory(translatable("entry.chatbridge.guildChat")).setExpanded(false)
+        val guild = entryBuilder.startSubCategory(translatable("entry.chatbridge.guildChat")).setExpanded(false)
+        val officer = entryBuilder.startSubCategory(translatable("entry.chatbridge.officerChat")).setExpanded(false)
+        val party = entryBuilder.startSubCategory(translatable("entry.chatbridge.partyChat")).setExpanded(false)
+        val privateChat = entryBuilder.startSubCategory(translatable("entry.chatbridge.privateChat")).setExpanded(false)
 
-        val officer =
-            entryBuilder.startSubCategory(translatable("entry.chatbridge.officerChat")).setExpanded(false)
+        guild.add(entryBuilder.trimmedTextEntry("entry.chatbridge.prefix", config.guildChat.prefix, "Guild >") { config.guildChat.prefix = it })
+        guild.add(entryBuilder.colorEntry("entry.chatbridge.prefixColor", config.guildChat.prefixColor, 0x00AA00) { config.guildChat.prefixColor = it })
+        guild.add(entryBuilder.colorEntry("entry.chatbridge.messageColor", config.guildChat.messageColor, 0xFFFFFF) { config.guildChat.messageColor = it })
+        guild.add(entryBuilder.colorEntry("entry.chatbridge.guildNotificationColor", config.guildChat.guildNotificationColor, 0xFFFF55) { config.guildChat.guildNotificationColor = it })
+        guild.add(entryBuilder.colorEntry("entry.chatbridge.guildRankColor", config.guildChat.guildRankColor, 0x00AAAA) { config.guildChat.guildRankColor = it })
+        guild.add(entryBuilder.booleanEntry("entry.chatbridge.hideGuildRank", config.guildChat.hideGuildRank) { config.guildChat.hideGuildRank = it })
+        guild.add(entryBuilder.optionalUsernameColorEntry(config.guildChat.usernameColor) { config.guildChat.usernameColor = it })
+        guild.add(entryBuilder.booleanEntry("entry.chatbridge.hidePlayerRank", config.guildChat.hidePlayerRank) { config.guildChat.hidePlayerRank = it })
 
-        val party =
-            entryBuilder.startSubCategory(translatable("entry.chatbridge.partyChat")).setExpanded(false)
+        officer.add(entryBuilder.trimmedTextEntry("entry.chatbridge.prefix", config.officerChat.prefix, "Officer >") { config.officerChat.prefix = it })
+        officer.add(entryBuilder.colorEntry("entry.chatbridge.prefixColor", config.officerChat.prefixColor, 0x00AAAA) { config.officerChat.prefixColor = it })
+        officer.add(entryBuilder.colorEntry("entry.chatbridge.messageColor", config.officerChat.messageColor, 0xFFFFFF) { config.officerChat.messageColor = it })
+        officer.add(entryBuilder.colorEntry("entry.chatbridge.guildRankColor", config.officerChat.guildRankColor, 0x00AAAA) { config.officerChat.guildRankColor = it })
+        officer.add(entryBuilder.booleanEntry("entry.chatbridge.hideGuildRank", config.officerChat.hideGuildRank) { config.officerChat.hideGuildRank = it })
+        officer.add(entryBuilder.optionalUsernameColorEntry(config.officerChat.usernameColor) { config.officerChat.usernameColor = it })
+        officer.add(entryBuilder.booleanEntry("entry.chatbridge.hidePlayerRank", config.officerChat.hidePlayerRank) { config.officerChat.hidePlayerRank = it })
 
-        val private =
-            entryBuilder.startSubCategory(translatable("entry.chatbridge.privateChat")).setExpanded(false)
+        party.add(entryBuilder.trimmedTextEntry("entry.chatbridge.prefix", config.partyChat.prefix, "Party >") { config.partyChat.prefix = it })
+        party.add(entryBuilder.colorEntry("entry.chatbridge.prefixColor", config.partyChat.prefixColor, 0x5555FF) { config.partyChat.prefixColor = it })
+        party.add(entryBuilder.colorEntry("entry.chatbridge.messageColor", config.partyChat.messageColor, 0xFFFFFF) { config.partyChat.messageColor = it })
+        party.add(entryBuilder.optionalUsernameColorEntry(config.partyChat.usernameColor) { config.partyChat.usernameColor = it })
+        party.add(entryBuilder.booleanEntry("entry.chatbridge.hidePlayerRank", config.partyChat.hidePlayerRank) { config.partyChat.hidePlayerRank = it })
 
-        guild.add(
-            entryBuilder.startTextField(translatable("entry.chatbridge.prefix"), config.guildChat.prefix)
-                .setDefaultValue("Guild >")
-                .setSaveConsumer { value -> config.guildChat.prefix = value.trim() }
-                .build()
-        )
-
-        guild.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.prefixColor"),
-                Integer.decode(config.guildChat.prefixColor)
-            )
-                .setDefaultValue(0x00AA00)
-                .setSaveConsumer { value -> config.guildChat.prefixColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        guild.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.messageColor"),
-                Integer.decode(config.guildChat.messageColor)
-            )
-                .setDefaultValue(0xFFFFFF)
-                .setSaveConsumer { value -> config.guildChat.messageColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        guild.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.guildNotificationColor"),
-                Integer.decode(config.guildChat.guildNotificationColor)
-            )
-                .setDefaultValue(0xFFFF55)
-                .setSaveConsumer { value -> config.guildChat.guildNotificationColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        guild.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.guildRankColor"),
-                Integer.decode(config.guildChat.guildRankColor)
-            )
-                .setDefaultValue(0x00AAAA)
-                .setSaveConsumer { value -> config.guildChat.guildRankColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        guild.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.hideGuildRank"),
-                config.guildChat.hideGuildRank
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.guildChat.hideGuildRank = value }
-                .build()
-        )
-
-        guild.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.badUsernameColor"),
-                Integer.decode(config.guildChat.usernameColor ?: "#000000")
-            )
-                .setDefaultValue(0x000000)
-                .setSaveConsumer { value ->
-                    config.guildChat.usernameColor = if (value != 0x000000) String.format("#%06X", value) else null
-                }
-                .build()
-        )
-
-        guild.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.hidePlayerRank"),
-                config.guildChat.hidePlayerRank
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.guildChat.hidePlayerRank = value }
-                .build()
-        )
-
-        officer.add(
-            entryBuilder.startTextField(translatable("entry.chatbridge.prefix"), config.officerChat.prefix)
-                .setDefaultValue("Officer >")
-                .setSaveConsumer { value -> config.officerChat.prefix = value.trim() }
-                .build()
-        )
-
-        officer.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.prefixColor"),
-                Integer.decode(config.officerChat.prefixColor)
-            )
-                .setDefaultValue(0x00AAAA)
-                .setSaveConsumer { value -> config.officerChat.prefixColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        officer.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.messageColor"),
-                Integer.decode(config.officerChat.messageColor)
-            )
-                .setDefaultValue(0xFFFFFF)
-                .setSaveConsumer { value -> config.officerChat.messageColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        officer.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.guildRankColor"),
-                Integer.decode(config.officerChat.guildRankColor)
-            )
-                .setDefaultValue(0x00AAAA)
-                .setSaveConsumer { value -> config.officerChat.guildRankColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        officer.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.hideGuildRank"),
-                config.officerChat.hideGuildRank
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.officerChat.hideGuildRank = value }
-                .build()
-        )
-
-        officer.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.badUsernameColor"),
-                Integer.decode(config.officerChat.usernameColor ?: "#000000")
-            )
-                .setDefaultValue(0x000000)
-                .setSaveConsumer { value ->
-                    config.officerChat.usernameColor = if (value != 0x000000) String.format("#%06X", value) else null
-                }
-                .build()
-        )
-
-        officer.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.hidePlayerRank"),
-                config.officerChat.hidePlayerRank
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.officerChat.hidePlayerRank = value }
-                .build()
-        )
-
-        party.add(
-            entryBuilder.startTextField(translatable("entry.chatbridge.prefix"), config.partyChat.prefix)
-                .setDefaultValue("Party >")
-                .setSaveConsumer { value -> config.partyChat.prefix = value.trim() }
-                .build()
-        )
-
-        party.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.prefixColor"),
-                Integer.decode(config.partyChat.prefixColor)
-            )
-                .setDefaultValue(0x5555FF)
-                .setSaveConsumer { value -> config.partyChat.prefixColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        party.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.messageColor"),
-                Integer.decode(config.partyChat.messageColor)
-            )
-                .setDefaultValue(0xFFFFFF)
-                .setSaveConsumer { value -> config.partyChat.messageColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        party.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.badUsernameColor"),
-                Integer.decode(config.partyChat.usernameColor ?: "#000000")
-            )
-                .setDefaultValue(0x000000)
-                .setSaveConsumer { value ->
-                    config.partyChat.usernameColor = if (value != 0x000000) String.format("#%06X", value) else null
-                }
-                .build()
-        )
-
-        party.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.hidePlayerRank"),
-                config.partyChat.hidePlayerRank
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.partyChat.hidePlayerRank = value }
-                .build()
-        )
-
-        private.add(
-            entryBuilder.startTextField(
-                translatable("entry.chatbridge.receivePrefix"),
-                config.privateChat.receivePrefix
-            )
-                .setDefaultValue("From >")
-                .setSaveConsumer { value -> config.privateChat.receivePrefix = value.trim() }
-                .build()
-        )
-
-        private.add(
-            entryBuilder.startTextField(
-                translatable("entry.chatbridge.sendPrefix"),
-                config.privateChat.sendPrefix
-            )
-                .setDefaultValue("To >")
-                .setSaveConsumer { value -> config.privateChat.sendPrefix = value.trim() }
-                .build()
-        )
-
-        private.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.prefixColor"),
-                Integer.decode(config.privateChat.prefixColor)
-            )
-                .setDefaultValue(0xFF55FF)
-                .setSaveConsumer { value -> config.privateChat.prefixColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        private.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.messageColor"),
-                Integer.decode(config.privateChat.messageColor)
-            )
-                .setDefaultValue(0xAAAAAA)
-                .setSaveConsumer { value -> config.privateChat.messageColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        private.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.badUsernameColor"),
-                Integer.decode(config.privateChat.usernameColor ?: "#000000")
-            )
-                .setDefaultValue(0x000000)
-                .setSaveConsumer { value ->
-                    config.privateChat.usernameColor = if (value != 0x000000) String.format("#%06X", value) else null
-                }
-                .build()
-        )
-
-        private.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.hidePlayerRank"),
-                config.privateChat.hidePlayerRank
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.privateChat.hidePlayerRank = value }
-                .build()
-        )
+        privateChat.add(entryBuilder.trimmedTextEntry("entry.chatbridge.receivePrefix", config.privateChat.receivePrefix, "From >") { config.privateChat.receivePrefix = it })
+        privateChat.add(entryBuilder.trimmedTextEntry("entry.chatbridge.sendPrefix", config.privateChat.sendPrefix, "To >") { config.privateChat.sendPrefix = it })
+        privateChat.add(entryBuilder.colorEntry("entry.chatbridge.prefixColor", config.privateChat.prefixColor, 0xFF55FF) { config.privateChat.prefixColor = it })
+        privateChat.add(entryBuilder.colorEntry("entry.chatbridge.messageColor", config.privateChat.messageColor, 0xAAAAAA) { config.privateChat.messageColor = it })
+        privateChat.add(entryBuilder.optionalUsernameColorEntry(config.privateChat.usernameColor) { config.privateChat.usernameColor = it })
+        privateChat.add(entryBuilder.booleanEntry("entry.chatbridge.hidePlayerRank", config.privateChat.hidePlayerRank) { config.privateChat.hidePlayerRank = it })
 
         category.addEntry(guild.build())
         category.addEntry(officer.build())
         category.addEntry(party.build())
-        category.addEntry(private.build())
+        category.addEntry(privateChat.build())
     }
-
 }

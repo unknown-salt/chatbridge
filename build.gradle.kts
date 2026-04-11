@@ -28,6 +28,8 @@ dependencies {
 
 	modApi("me.shedaniel.cloth:cloth-config-fabric:20.0.149")
 	modApi("com.terraformersmc:modmenu:16.0.0")
+
+	testImplementation(kotlin("test"))
 }
 
 tasks.processResources {
@@ -40,6 +42,10 @@ tasks.processResources {
 
 tasks.withType<JavaCompile>().configureEach {
 	options.release = 21
+}
+
+tasks.test {
+	useJUnitPlatform()
 }
 
 kotlin {
