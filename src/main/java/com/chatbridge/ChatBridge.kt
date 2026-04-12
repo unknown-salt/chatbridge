@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.minecraft.network.chat.Component
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.util.regex.Pattern.compile
+import java.util.regex.Pattern
 import com.chatbridge.config.ChatBridgeConfig.config
 import com.chatbridge.utils.Extras
 import com.chatbridge.utils.ChatBridgeCommands
@@ -15,10 +15,13 @@ import com.chatbridge.utils.ChatBridgeCommands
 
 object ChatBridge : ModInitializer {
     val logger: Logger = LoggerFactory.getLogger("chatbridge")
+    private val formattingCodePattern: Pattern = Pattern.compile("§\\w")
+    private val formatter = ChatFormatter()
+    private val extras = Extras()
 
     override fun onInitialize() {
         ChatBridgeConfig.load()
-        ChatBridgeCommands().register()
+        ChatBridgeCommands.register()
         ClientReceiveMessageEvents.MODIFY_GAME.register(::onModify)
     }
 
@@ -26,9 +29,10 @@ object ChatBridge : ModInitializer {
         if (actionBar) return message
 
         try {
-            val unformatted = compile("§\\w").matcher(message.string).replaceAll("")
+            val unformatted = formattingCodePattern.matcher(message.string).replaceAll("")
+            val channelToken = unformatted.substringBefore(' ')
 
-            val channel = when (unformatted.split(" ")[0]) {
+            val channel = when (channelToken) {
                 "Guild" -> ChatChannel.GUILD
                 "Officer" -> ChatChannel.OFFICER
                 "Party" -> ChatChannel.PARTY
@@ -40,15 +44,15 @@ object ChatBridge : ModInitializer {
 
             var formatted = message
 
-            if (channel != ChatChannel.UNKNOWN) formatted = ChatFormatter().format(formatted, channel)
+            if (channel != ChatChannel.UNKNOWN) formatted = formatter.format(formatted, channel)
 
-            if (config.extras.discordWarnings && message.string.split("\n").size > 1) formatted =
-                Extras().removeDiscordWarning(formatted) ?: formatted
+            if (config.extras.discordWarnings && message.string.contains('\n')) formatted =
+                extras.removeDiscordWarning(formatted) ?: formatted
 
-            if (config.extras.timestamp.enabled && !(config.extras.timestamp.ignoreEmpty && message.string.trim() == ""))
+            if (config.extras.timestamp.enabled && !(config.extras.timestamp.ignoreEmpty && message.string.isBlank()))
                 formatted = try {
                     Component.empty()
-                        .append(Extras().timestampComponent())
+                        .append(extras.timestampComponent())
                         .append(Component.literal(" "))
                         .append(formatted)
                 } catch (e: Exception) {
@@ -74,8 +78,7 @@ object ChatBridge : ModInitializer {
 
     fun lastColorCode(text: String?): String {
         if (text.isNullOrEmpty()) return "§7"
-        val matches = Regex("§[0-9a-f]").findAll(text.lowercase()).toList()
-        return (matches.lastOrNull()?.value ?: "§7")
+        return Regex("§[0-9a-f]").findAll(text.lowercase()).lastOrNull()?.value ?: "§7"
     }
 
     fun findColor(component: Component, text: String): Int? {
@@ -86,5 +89,4 @@ object ChatBridge : ModInitializer {
     enum class ChatChannel {
         PARTY, GUILD, OFFICER, PRIVATE, UNKNOWN
     }
-
 }

@@ -15,10 +15,7 @@ class ExtrasCategory {
         entryBuilder: ConfigEntryBuilder,
     ) {
         category.addEntry(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.extras.discordWarnings"),
-                config.extras.discordWarnings
-            )
+            entryBuilder.startBooleanToggle(translatable("entry.chatbridge.extras.discordWarnings"), config.extras.discordWarnings)
                 .setDefaultValue(true)
                 .setSaveConsumer { value -> config.extras.discordWarnings = value }
                 .build()
@@ -27,15 +24,7 @@ class ExtrasCategory {
         val timestamp =
             entryBuilder.startSubCategory(translatable("entry.chatbridge.timestamp")).setExpanded(false)
 
-        timestamp.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.enabled"),
-                config.extras.timestamp.enabled
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.extras.timestamp.enabled = value }
-                .build()
-        )
+        timestamp.add(entryBuilder.booleanEntry("entry.chatbridge.enabled", config.extras.timestamp.enabled) { config.extras.timestamp.enabled = it })
 
         timestamp.add(
             entryBuilder.startTextField(
@@ -51,35 +40,9 @@ class ExtrasCategory {
                 .build()
         )
 
-        timestamp.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.timestamp.color"),
-                Integer.decode(config.extras.timestamp.color)
-            )
-                .setDefaultValue(0xFF55FF)
-                .setSaveConsumer { value -> config.extras.timestamp.color = String.format("#%06X", value) }
-                .build()
-        )
-
-        timestamp.add(
-            entryBuilder.startColorField(
-                translatable("entry.chatbridge.timestamp.numbersColor"),
-                Integer.decode(config.extras.timestamp.numbersColor)
-            )
-                .setDefaultValue(0xFF33FF)
-                .setSaveConsumer { value -> config.extras.timestamp.numbersColor = String.format("#%06X", value) }
-                .build()
-        )
-
-        timestamp.add(
-            entryBuilder.startBooleanToggle(
-                translatable("entry.chatbridge.timestamp.ignoreEmpty"),
-                config.extras.timestamp.ignoreEmpty
-            )
-                .setDefaultValue(false)
-                .setSaveConsumer { value -> config.extras.timestamp.ignoreEmpty = value }
-                .build()
-        )
+        timestamp.add(entryBuilder.colorEntry("entry.chatbridge.timestamp.color", config.extras.timestamp.color, 0xFF55FF) { config.extras.timestamp.color = it })
+        timestamp.add(entryBuilder.colorEntry("entry.chatbridge.timestamp.numbersColor", config.extras.timestamp.numbersColor, 0xFF33FF) { config.extras.timestamp.numbersColor = it })
+        timestamp.add(entryBuilder.booleanEntry("entry.chatbridge.timestamp.ignoreEmpty", config.extras.timestamp.ignoreEmpty) { config.extras.timestamp.ignoreEmpty = it })
 
         timestamp.add(entryBuilder.startTextDescription(translatable("description.chatbridge.timestamp")).build())
 
@@ -92,9 +55,8 @@ class ExtrasCategory {
             val formatter = DateTimeFormatter.ofPattern(pattern)
             formatter.format(LocalDateTime.now())
             true
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             false
         }
     }
-
 }
