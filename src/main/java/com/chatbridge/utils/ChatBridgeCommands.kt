@@ -5,8 +5,7 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommands.literal
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.minecraft.client.Minecraft
 
-class ChatBridgeCommands {
-
+object ChatBridgeCommands {
     fun register() {
         ClientCommandRegistrationCallback.EVENT.register { dispatcher, _ ->
             dispatcher.register(

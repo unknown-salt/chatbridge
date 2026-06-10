@@ -27,6 +27,8 @@ dependencies {
 
     api("me.shedaniel.cloth:cloth-config-fabric:26.1.154")
     api("com.terraformersmc:modmenu:18.0.0-alpha.8")
+    
+    testImplementation(kotlin("test
 }
 
 tasks.processResources {
@@ -39,6 +41,10 @@ tasks.processResources {
 
 tasks.withType<JavaCompile>().configureEach {
     options.release = 25
+}
+
+tasks.test {
+	useJUnitPlatform()
 }
 
 kotlin {

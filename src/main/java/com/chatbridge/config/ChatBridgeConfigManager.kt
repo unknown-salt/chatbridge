@@ -23,9 +23,7 @@ object ChatBridgeConfigManager {
         OtherChatsCategory().build(otherChats, entryBuilder)
         ExtrasCategory().build(extras, entryBuilder)
 
-        builder.setSavingRunnable {
-            ChatBridgeConfig.save()
-        }
+        builder.setSavingRunnable(ChatBridgeConfig::save)
 
         return builder.build()
     }
