@@ -1,7 +1,7 @@
 package com.chatbridge.utils
 
 import com.chatbridge.config.ChatBridgeConfigManager
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands.literal
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.minecraft.client.Minecraft
 
