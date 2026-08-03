@@ -13,7 +13,7 @@ object ChatBridgeCommands {
                     val client = Minecraft.getInstance()
                     val screen = ChatBridgeConfigManager.build(null)
                     client.schedule {
-                        client.setScreen(screen)
+                        client.gui.setScreen()
                     }
                     1
                 }
