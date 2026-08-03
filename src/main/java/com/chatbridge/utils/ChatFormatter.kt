@@ -8,6 +8,7 @@ import com.chatbridge.config.ChatBridgeConfig.config
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
+import net.minecraft.network.chat.TextColor
 import java.util.regex.Pattern
 
 class ChatFormatter {
@@ -176,11 +177,13 @@ class ChatFormatter {
 
         return message
     }
-
+    
     private fun resolveUsernameColor(configColor: String?, rank: String?): Int {
         return configColor?.toColor()
             ?: if (rank.isNullOrEmpty()) 0xAAAAAA
-            else ChatFormatting.getByCode(lastColorCode(rank)[1])?.color ?: 0xAAAAAA
+            else ChatFormatting.getByCode(lastColorCode(rank)[1])
+                ?.let { TextColor.fromLegacyFormat(it)?.getValue() }
+                ?: 0xAAAAAA
     }
 
     private fun parsePattern(messageText: String, pattern: Pattern, hasGuildRank: Boolean): ParsedMessage? {
