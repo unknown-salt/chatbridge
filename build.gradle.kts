@@ -25,8 +25,8 @@ dependencies {
     implementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
     implementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
 
-    api("me.shedaniel.cloth:cloth-config-fabric:26.1.154")
-    api("com.terraformersmc:modmenu:18.0.0-alpha.8")
+    api("me.shedaniel.cloth:cloth-config-fabric:26.2.155")
+    api("com.terraformersmc:modmenu:20.0.1")
 
     testImplementation(kotlin("test"))
 }
