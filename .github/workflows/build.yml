@@ -21,7 +21,9 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       - name: make gradle wrapper executable
-        run: chmod +x ./gradlew
+        run: chmod +x ./gradlew      
+      - name: tests
+        run: ./gradlew test
       - name: build
         run: ./gradlew build
       - name: capture build artifacts
