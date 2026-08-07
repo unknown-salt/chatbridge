@@ -13,10 +13,10 @@ import java.util.regex.Pattern
 class ChatFormatter {
     companion object {
         internal val GUILD_PATTERN: Pattern = Pattern.compile(
-            """^(?:§\w)?(?:G|Guild) > ((?:§\w)?\[(?:\S+?)\] )?(?:§\w)?(\w+)(?: §3\[(\S+?)\])?(?:§\w)?: ?(.+)$"""
+            """^(?:§\w)?(?:G|Guild) > ((?:§\w)?\[(?:\S+?)\] )?(?:§\w)?(\w+)(?: §\w\[(\S+?)\])?(?:§\w)?: ?(.+)$"""
         )
         internal val OFFICER_PATTERN: Pattern = Pattern.compile(
-            """^(?:§\w)?(?:Officer) > ((?:§\w)?\[(?:\S+?)\] )?(?:§\w)?(\w+)(?: §3\[(\S+?)\])?(?:§\w)?: ?(.+)$"""
+            """^(?:§\w)?(?:Officer) > ((?:§\w)?\[(?:\S+?)\] )?(?:§\w)?(\w+)(?: §\w\[(\S+?)\])?(?:§\w)?: ?(.+)$"""
         )
         internal val BRIDGE_PATTERN: Pattern = Pattern.compile(
             """^ *((?:.+?)(?: attached an? \w+(?::|$)| replied to .+ with an? \w+(?::|$)| replied to .+?(?::|$)|:))(?:(?: (.*)?$)|$)"""
