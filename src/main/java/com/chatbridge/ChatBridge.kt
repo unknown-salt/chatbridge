@@ -12,7 +12,6 @@ import com.chatbridge.config.ChatBridgeConfig.config
 import com.chatbridge.utils.Extras
 import com.chatbridge.utils.ChatBridgeCommands
 
-
 object ChatBridge : ModInitializer {
     val logger: Logger = LoggerFactory.getLogger("chatbridge")
     private val formattingCodePattern: Pattern = Pattern.compile("§\\w")
@@ -36,8 +35,11 @@ object ChatBridge : ModInitializer {
                 "Guild" -> ChatChannel.GUILD
                 "Officer" -> ChatChannel.OFFICER
                 "Party" -> ChatChannel.PARTY
-                "From" -> ChatChannel.PRIVATE
-                "To" -> ChatChannel.PRIVATE
+                "From", "To" -> {
+                    val color = findColor(message, channelToken)
+                    if (color == 0xFF55FF) ChatChannel.PRIVATE
+                    else ChatChannel.UNKNOWN
+                }
                 "G" -> ChatChannel.GUILD
                 else -> ChatChannel.UNKNOWN
             }
