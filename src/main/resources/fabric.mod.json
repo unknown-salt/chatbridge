@@ -6,7 +6,7 @@
   "description": "Provides customizable formatting for bridge bot messages.",
   "authors": ["FanerXp"],
   "contact": {
-    "homepage": "https://modrinth.com/mod/chatbridge-ws",
+    "homepage": "https://modrinth.com/mod/chatbridge",
     "sources": "https://github.com/unknown-salt/chatbridge",
     "issues": "https://github.com/unknown-salt/chatbridge/issues"
   },
@@ -33,7 +33,7 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.modrinth": "https://modrinth.com/mod/chatbridge-ws"
+        "modmenu.modrinth": "https://modrinth.com/mod/chatbridge"
       }
     }
   }
